@@ -28,7 +28,7 @@ class MessageController extends Controller
         $name = $user->first_name;
         $favorites = DB::table('favorites')->where('user_id', $user->id)->get();
         $preferences = DB::table('dining_trans_halls')->where('user_id', $user->id)->where('preference', 1)->get();
-        $message = "Hi, ".$name.". ";
+        $message = "Yo. ";
         foreach($favorites as $food) {
           $foodName = $food->food_name;
           foreach($preferences as $preference) {
@@ -53,7 +53,7 @@ class MessageController extends Controller
         }
       }
       echo $message;
-      // $twilio->message('+17149870023', $message);
+      $twilio->message('+18183577953', $message);
       echo 'SENT!';
     }
     /**

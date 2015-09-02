@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'UserController@index');
+Route::get('/login', 'UserController@index');
 Route::get('/signup', function() {
   return view('signup');
 });

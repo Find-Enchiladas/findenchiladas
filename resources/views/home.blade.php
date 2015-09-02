@@ -11,15 +11,15 @@
           <div id="login">
               <p>We offer <strong>personalized notifications</strong> for food across the 5C's.</p>
                   <p style="margin-bottom: 1em;">
-                      Log in with...
-                      <label for="rad-email">Email</label><input type="radio" name="choose" id="rad-email" onclick="showUsername();hidePhone()" checked> <br>
-                      <label for="rad-phone">Phone</label><input type="radio" name="choose" id="rad-phone" onclick="showPhone();hideUsername()">
+                      Log in here...
+                      {{-- <label for="rad-email">Email</label><input type="radio" name="choose" id="rad-email" onclick="showUsername();hidePhone()" checked> --}}
+
                   </p>
-              {!! Form::open(['id' => 'phone', 'style' => 'display:none']) !!}
+              {{-- {!! Form::open(['id' => 'phone', 'style' => 'display:none']) !!}
                   <input type="text" name="phone" placeholder="Phone Number" style="width:500px;">
                   <input type="password" name="passPhone" placeholder="Password" style="width:500px;">
                   <input type="submit" class="button big scrolly" value="Enter" style="margin-top: 1em">
-              {!! Form::close() !!}
+              {!! Form::close() !!} --}}
               {!! Form::open(['id' => 'username', 'url' => '/login']) !!}
                 <input type="text" name="email" placeholder="E-mail" style="width:500px;">
                 <input type="password" name="password" placeholder="Password" style="width:500px;">

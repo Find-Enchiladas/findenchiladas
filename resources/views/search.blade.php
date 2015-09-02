@@ -31,7 +31,7 @@
         <h2>Here's what we found today for {{$food}}</h2>
         <ul class="search-results">
         @foreach($list as $item)
-          <li>{{$item->food_name}} at {{DB::table('dining_halls')->select('nickname')->where('id', $item->dining_id)->get()[0]->nickname}}</li>
+          <li>{{$item->food_name}} at {{DB::table('dining_halls')->select('nickname')->where('id', $item->dining_id)->get()[0]->nickname}} for {{$item->meal}}</li>
         @endforeach
         </ul>
       @endif
