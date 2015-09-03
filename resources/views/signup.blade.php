@@ -54,7 +54,7 @@
                     <input type="email" name="email" class="form-control" id="email" required="true" placeholder="Email" />
                   </div>
                   <div class="6u">
-                    <input type="text" name="phone" class="form-control" placeholder="Phone Number">
+                    <input type="text" name="phone" class="form-control" placeholder="Phone Number - 10 Digits" maxlength="10">
                   </div>
                   <div class="6u">
                     <input type="password" name="password" id="pass" required="true" placeholder="Password" />
