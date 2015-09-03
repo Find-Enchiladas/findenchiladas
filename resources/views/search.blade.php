@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'Find Something')
+
 @section('styles')
   <style>
     .search-results {

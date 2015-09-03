@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'Welcome '.\Auth::user()->first_name)
+
 @section('content')
 <div class="wrapper style1 first">
   <article class="container" id="top">

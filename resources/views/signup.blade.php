@@ -1,5 +1,6 @@
 @extends('master')
 
+@section('title', 'Signup')
 
 @section('styles')
 <style>

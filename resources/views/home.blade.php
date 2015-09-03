@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'Welcome to Find Enchiladas')
+
 @section('content')
 <!-- Home -->
   <div class="wrapper style1 first">

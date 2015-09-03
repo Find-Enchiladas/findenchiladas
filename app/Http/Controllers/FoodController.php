@@ -26,7 +26,7 @@ class FoodController extends Controller
 
     public function search(Request $request) {
       $food_name = $request->input('food');
-      $list = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food_name.'%')->get();
+      $list = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food_name.'%')->get();
       return view('search', ['list' => $list, 'food' => $food_name]);
     }
 

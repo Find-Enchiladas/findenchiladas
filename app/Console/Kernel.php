@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\Inspire::class,
         \App\Console\Commands\MenuScraper::class,
-		\App\Console\Commands\Message::class,
+		    \App\Console\Commands\Message::class,
     ];
 
     /**
