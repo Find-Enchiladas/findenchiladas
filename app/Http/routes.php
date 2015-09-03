@@ -31,7 +31,3 @@ Route::post('/login', ['uses' => 'Auth\AuthController@postLogin', 'as' => 'auth.
 Route::get('/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout']);
 Route::post('/forgot', 'UserController@forgot');
 Route::post('/phone', 'UserController@phone');
-
-// Route::get('/menu', 'FoodController@scrape5CMenu');
-
-// Route::get('/message', 'MessageController@sendMessage');
