@@ -26,34 +26,50 @@ class MessageController extends Controller
       foreach($users as $user) {
         $number = $user->phone;
         $name = $user->first_name;
+        $phone = $user->phone;
         $favorites = DB::table('favorites')->where('user_id', $user->id)->get();
         $preferences = DB::table('dining_trans_halls')->where('user_id', $user->id)->where('preference', 1)->get();
-        $message = "Yo. ";
+        $message = "Hi " . $name . ", Today you can find 
+";
         foreach($favorites as $food) {
-          $foodName = $food->food_name;
-          foreach($preferences as $preference) {
+
+        //needs if statement for eliminate non-matches
+          $foodNameAllCaps = strtoupper($food->food_name); //caps lock this
+          $submessage = "";
+          foreach($preferences as $preference) { //preference is the dining halls that they want to know about
             $hall = DB::table('dining_halls')->select('nickname')->where('id', $preference->dining_id)->get()[0]->nickname;
             //if weekend...
-            $breakfast = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->count();
-            $breakfast1 = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->get();
+            //$breakfast = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->count(); //an integer value
+            $breakfast1 = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->get(); //food name
             foreach($breakfast1 as $breakfast) {
-              $message = $message.$breakfast->food_name." will be served at ".$hall." for breakfast | ";
+              $submessage = $submessage."[".$hall." for Breakfast] 
+";
             }
-            $lunch = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->count();
+            //$lunch = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->count();
             $lunch1 = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->get();
             foreach($lunch1 as $lunch) {
-              $message = $message.$lunch->food_name." will be served at ".$hall." for lunch | ";
+              $submessage = $submessage."[".$hall." for Lunch] 
+";
             }
-            $dinner = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->count();
+            //$dinner = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->count();
             $dinner1 = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->get();
             foreach($dinner1 as $dinner) {
-              $message = $message.$dinner->food_name." will be served at ".$hall." for dinner | ";
+              $submessage = $submessage."[".$hall." for Dinner] 
+";
             }
           }
+        if ($submessage != "") {
+            $message = $message."
+".$foodNameAllCaps." at:
+";
+            $message = $message.$submessage;
+            }
         }
+        $message = $message."
+for specifics, visit findenchiladas.com/search";
+        $twilio->message('+1'.$phone, $message); 
       }
       echo $message;
-      $twilio->message('+18183577953', $message);
       echo 'SENT!';
     }
     /**
