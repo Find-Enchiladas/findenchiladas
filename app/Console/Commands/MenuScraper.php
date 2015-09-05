@@ -57,20 +57,27 @@ class MenuScraper extends Command
             $diningHall = 'Collins';
           }
           $node->filter('li')->each(function ($node1) use($count, $diningHall, $date) {
-            if($count == 0) {
-              $meal = 'breakfast';
-            }
-            elseif($count == 1) {
-              $meal = 'lunch';
+            if(Carbon::now()->dayOfWeek >= 6) {
+              if($count == 0) {
+                $meal = 'brunch';
+              }
+              else {
+                $meal = 'weekend dinner';
+              }
             }
             else {
-              $meal = 'dinner';
+              if($count == 0) {
+                $meal = 'breakfast';
+              }
+              elseif($count == 1) {
+                $meal = 'lunch';
+              }
+              else {
+                $meal = 'dinner';
+              }
             }
             $food = $node1->text();
-            echo "For ".$meal." we have ".$food." at ".$diningHall;
-            echo "<br>";
             $count++;
-            //$store_id = DB::table('stores')->where('sh_name', $diningHall)->value('store_id');
             $id = DB::table('dining_halls')->where('nickname', $diningHall)->value('id');
             if (Dining_Hall_Food::where('food_name', $food)->where('meal', '=', $meal)->where('dining_id', $id)->where('date_served', $date)->exists()) {
               echo $food." already exists for ".$meal." on".$date;

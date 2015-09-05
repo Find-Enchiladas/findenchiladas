@@ -57,23 +57,37 @@ class Message extends Command
           foreach($preferences as $preference) { //preference is the dining halls that they want to know about
             $hall = DB::table('dining_halls')->select('nickname')->where('id', $preference->dining_id)->get()[0]->nickname;
             //if weekend...
-            //$breakfast = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->count(); //an integer value
-            $breakfast1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->get(); //food name
-            foreach($breakfast1 as $breakfast) {
-              $submessage = $submessage."[".$hall." for Breakfast]
+            if(Carbon::now()->dayOfWeek >= 6) {
+              $brunch1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'brunch')->get(); //food name
+              foreach($brunch1 as $brunch) {
+                $submessage = $submessage."[".$hall." for Brunch]
 ";
+              }
+              $weekend_d1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'weekend dinner')->get(); //food name
+              foreach($weekend_d1 as $weekend_d) {
+                $submessage = $submessage."[".$hall." for Dinner]
+";
+              }
             }
-            //$lunch = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->count();
-            $lunch1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->get();
-            foreach($lunch1 as $lunch) {
-              $submessage = $submessage."[".$hall." for Lunch]
+            else{
+              //$breakfast = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->count(); //an integer value
+              $breakfast1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->get(); //food name
+              foreach($breakfast1 as $breakfast) {
+                $submessage = $submessage."[".$hall." for Breakfast]
 ";
-            }
-            //$dinner = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->count();
-            $dinner1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->get();
-            foreach($dinner1 as $dinner) {
-              $submessage = $submessage."[".$hall." for Dinner]
+              }
+              //$lunch = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->count();
+              $lunch1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->get();
+              foreach($lunch1 as $lunch) {
+                $submessage = $submessage."[".$hall." for Lunch]
 ";
+              }
+              //$dinner = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->count();
+              $dinner1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->get();
+              foreach($dinner1 as $dinner) {
+                $submessage = $submessage."[".$hall." for Dinner]
+";
+              }
             }
           }
         if ($submessage != "") {
