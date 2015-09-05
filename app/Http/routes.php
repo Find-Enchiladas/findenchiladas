@@ -12,6 +12,7 @@
 */
 
 Route::get('/', ['as' => 'auth.login', 'uses' => 'UserController@index']);
+Route::get('/home', ['uses' => 'UserController@index']);
 Route::get('/login', 'UserController@index');
 Route::get('/signup', function() {
   return view('signup');
@@ -31,3 +32,9 @@ Route::post('/login', ['uses' => 'Auth\AuthController@postLogin', 'as' => 'auth.
 Route::get('/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout']);
 Route::post('/forgot', 'UserController@forgot');
 Route::post('/phone', 'UserController@phone');
+
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+
+// Password reset routes...
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');

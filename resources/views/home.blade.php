@@ -29,12 +29,11 @@
               {!! Form::close() !!}
           </div>
 
-          {!! Form::open(['id' => 'forgot', 'style' => 'display:none']) !!}
+          {!! Form::open(['id' => 'forgot', 'url' => '/password/email', 'style' => 'display:none']) !!}
             <p>
               Please enter your username to retrieve password...
             </p>
-            <input type="text" name="userForgot" placeholder="Username">
-            <input type="text" name="emailForgot" placeholder="E-mail">
+            <input type="text" name="email" placeholder="E-mail">
             <input type="submit" value="Get Password">
           {!! Form::close() !!}
         </div>
