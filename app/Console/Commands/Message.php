@@ -57,7 +57,7 @@ class Message extends Command
           foreach($preferences as $preference) { //preference is the dining halls that they want to know about
             $hall = DB::table('dining_halls')->select('nickname')->where('id', $preference->dining_id)->get()[0]->nickname;
             //if weekend...
-            if(Carbon::now()->dayOfWeek >= 6) {
+            if(Carbon::now()->dayOfWeek == 6 || Carbon::now()->dayOfWeek == 0) {
               $brunch1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'brunch')->get(); //food name
               foreach($brunch1 as $brunch) {
                 $submessage = $submessage."[".$hall." for Brunch]

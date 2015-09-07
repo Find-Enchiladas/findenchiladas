@@ -57,7 +57,7 @@ class MenuScraper extends Command
             $diningHall = 'Collins';
           }
           $node->filter('li')->each(function ($node1) use($count, $diningHall, $date) {
-            if(Carbon::now()->dayOfWeek >= 6) {
+            if(Carbon::now()->dayOfWeek == 6 || Carbon::now()->dayOfWeek == 0) {
               if($count == 0) {
                 $meal = 'brunch';
               }
