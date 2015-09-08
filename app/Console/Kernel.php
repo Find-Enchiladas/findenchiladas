@@ -29,8 +29,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('inspire')
                  ->hourly();
         $schedule->command('scrape:menu')
-                 ->twiceDaily(0,5);
-		$schedule->command('send:messages')
+                 ->twiceDaily(1,5);
+		    $schedule->command('send:messages')
                  ->dailyAt('07:00');
     }
 }
