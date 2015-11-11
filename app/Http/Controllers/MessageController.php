@@ -1,5 +1,5 @@
 <?php
-
+//DON'T USE THIS IT'S OBSOLETE USE CONSOLE COMMMAND
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -22,14 +22,15 @@ class MessageController extends Controller
 
     public function sendMessage() {
       $twilio = new \Aloha\Twilio\Twilio(env('TWILIO_SID'), env('TWILIO_TOKEN'), env('TWILIO_NUMBER'));
-      $users = DB::table('users')->get();
+      $users = DB::table('users')->where('smsNotify', 1)->get();
       foreach($users as $user) {
+        $count = 0;
         $number = $user->phone;
         $name = $user->first_name;
         $phone = $user->phone;
         $favorites = DB::table('favorites')->where('user_id', $user->id)->get();
         $preferences = DB::table('dining_trans_halls')->where('user_id', $user->id)->where('preference', 1)->get();
-        $message = "Hi " . $name . ", Today you can find 
+        $message = "Hi " . $name . ", Today you can find
 ";
         foreach($favorites as $food) {
 
@@ -42,20 +43,23 @@ class MessageController extends Controller
             //$breakfast = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->count(); //an integer value
             $breakfast1 = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'breakfast')->get(); //food name
             foreach($breakfast1 as $breakfast) {
-              $submessage = $submessage."[".$hall." for Breakfast] 
+              $submessage = $submessage."[".$hall." for Breakfast]
 ";
+              $count++;
             }
             //$lunch = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->count();
             $lunch1 = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->get();
             foreach($lunch1 as $lunch) {
-              $submessage = $submessage."[".$hall." for Lunch] 
+              $submessage = $submessage."[".$hall." for Lunch]
 ";
+              $count++;
             }
             //$dinner = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->count();
             $dinner1 = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->get();
             foreach($dinner1 as $dinner) {
-              $submessage = $submessage."[".$hall." for Dinner] 
+              $submessage = $submessage."[".$hall." for Dinner]
 ";
+              $count++;
             }
           }
         if ($submessage != "") {
@@ -67,7 +71,9 @@ class MessageController extends Controller
         }
         $message = $message."
 for specifics, visit findenchiladas.com/search";
-        $twilio->message('+1'.$phone, $message); 
+        if($count > 0) { //don't send a message if nothing is derrr.
+          $twilio->message('+1'.$phone, $message);
+        }
       }
       echo $message;
       echo 'SENT!';

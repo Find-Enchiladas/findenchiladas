@@ -23,6 +23,7 @@
 					<li><a>{{\Auth::user()->first_name}} {{\Auth::user()->last_name}}</a></li>
 					<li><a href="/user">Favorites</a></li>
 					<li><a href="/search">Search</a></li>
+					<li><a href="/user/settings">Settings</a></li>
 					<li><a href="/logout">Logout</a></li>
 					@else
 					<li><a href="/">Login</a></li>

@@ -33,6 +33,9 @@ Route::get('/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.
 Route::post('/forgot', 'UserController@forgot');
 Route::post('/phone', 'UserController@phone');
 
+Route::get('/user/settings', 'UserController@settings');
+Route::post('/user/settings/sms', 'UserController@sms');
+
 Route::post('password/email', 'Auth\PasswordController@postEmail');
 
 // Password reset routes...

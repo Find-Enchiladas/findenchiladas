@@ -40,8 +40,9 @@ class Message extends Command
     public function handle()
     {
         $twilio = new \Aloha\Twilio\Twilio(env('TWILIO_SID'), env('TWILIO_TOKEN'), env('TWILIO_NUMBER'));
-      $users = DB::table('users')->get();
+      $users = DB::table('users')->where('smsNotify', 1)->get();
       foreach($users as $user) {
+        $count = 0;
         $number = $user->phone;
         $name = $user->first_name;
         $phone = $user->phone;
@@ -62,11 +63,13 @@ class Message extends Command
               foreach($brunch1 as $brunch) {
                 $submessage = $submessage."[".$hall." for Brunch]
 ";
+            $count++;
               }
               $weekend_d1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'weekend dinner')->get(); //food name
               foreach($weekend_d1 as $weekend_d) {
                 $submessage = $submessage."[".$hall." for Dinner]
 ";
+            $count++;
               }
             }
             else{
@@ -75,18 +78,21 @@ class Message extends Command
               foreach($breakfast1 as $breakfast) {
                 $submessage = $submessage."[".$hall." for Breakfast]
 ";
+            $count++;
               }
               //$lunch = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->count();
               $lunch1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'lunch')->get();
               foreach($lunch1 as $lunch) {
                 $submessage = $submessage."[".$hall." for Lunch]
 ";
+            $count++;
               }
               //$dinner = DB::table('dining_hall_food')->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->count();
               $dinner1 = DB::table('dining_hall_food')->where('date_served', substr(Carbon::today(),0,10))->where('food_name', 'LIKE', '%'.$food->food_name.'%')->where('dining_id', $preference->dining_id)->where('meal', 'dinner')->get();
               foreach($dinner1 as $dinner) {
                 $submessage = $submessage."[".$hall." for Dinner]
 ";
+            $count++;
               }
             }
           }
@@ -99,9 +105,14 @@ class Message extends Command
         }
         $message = $message."
 for specifics, visit findenchiladas.com/search";
-        $twilio->message('+1'.$phone, $message);
+        if($count > 0) {
+          $twilio->message('+1'.$phone, $message);
+          echo $message;
+          echo 'SENT!';
+        }
+        else {
+          echo "nothing to send :(";
+        }
       }
-      echo $message;
-      echo 'SENT!';
     }
 }

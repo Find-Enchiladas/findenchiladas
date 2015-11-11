@@ -52,6 +52,27 @@ class UserController extends Controller
       }
     }
 
+    public function settings() {
+      if(\Auth::check()) {
+        $settings = DB::table('users')->where('id', \Auth::user()->id)->get();
+        return view('settings', ['settings' => $settings]);
+      }
+      else {
+        return redirect('/');
+      }
+
+    }
+    public function sms(Request $request) {
+      if(\Auth::check()) {
+        $user = \Auth::user();
+        $user->smsNotify = $request->input('smsVal');
+        $user->save();
+        return redirect('/user/settings');
+
+
+      }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
