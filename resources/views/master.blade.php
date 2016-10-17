@@ -1,88 +1,105 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>@yield('title')</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link rel="shortcut icon" type="image/png" sizes="16x16" href="{{ URL::asset('favicon-16x16.png') }}">
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/skel.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/style.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/style-desktop.css') }}" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
-	</head>
-	@yield('styles')
-	<body>
-		@yield('navigation')
-    <!-- Nav -->
-			<nav id="nav">
-				<ul class="container">
-					@if(\Auth::check())
-					<li><a>{{\Auth::user()->first_name}} {{\Auth::user()->last_name}}</a></li>
-					<li><a href="/user">Favorites</a></li>
-					<li><a href="/search">Search</a></li>
-					<li><a href="/user/settings">Settings</a></li>
-					<li><a href="/logout">Logout</a></li>
-					@else
-					<li><a href="/">Login</a></li>
-					<li><a href="/signup">Sign Up</a></li>
-					<li><a href="/search">Search</a></li>
-					@endif
-				</ul>
-			</nav>
-    @yield('content')
-		<!-- Sign Up -->
-			<div class="wrapper style4">
-				<article id="contact" class="container 75%">
-						<div class="row">
-							<div class="12u">
-								<hr />
-								<h3>Find us on ...</h3>
-								<ul class="social">
-									<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-									<li><a href="https://github.com/Find-Enchiladas/" class="icon fa-github"><span class="label">Github</span></a></li>
-									<!--
-									<li><a href="#" class="icon fa-rss"><span>RSS</span></a></li>
-									<li><a href="#" class="icon fa-instagram"><span>Instagram</span></a></li>
-									<li><a href="#" class="icon fa-foursquare"><span>Foursquare</span></a></li>
-									<li><a href="#" class="icon fa-skype"><span>Skype</span></a></li>
-									<li><a href="#" class="icon fa-soundcloud"><span>Soundcloud</span></a></li>
-									<li><a href="#" class="icon fa-youtube"><span>YouTube</span></a></li>
-									<li><a href="#" class="icon fa-blogger"><span>Blogger</span></a></li>
-									<li><a href="#" class="icon fa-flickr"><span>Flickr</span></a></li>
-									<li><a href="#" class="icon fa-vimeo"><span>Vimeo</span></a></li>
-									-->
-								</ul>
-								<hr />
-							</div>
-						</div>
-					<footer>
-						<ul id="copyright">
-							<li>&copy; Find Enchiladas. All rights reserved.</li><li>Designed by: Andrew Atwong '16 &amp; Kevin Cunanan '18</li>
-						</ul>
-					</footer>
-				</article>
-			</div>
+<!DOCTYPE html>
+<html lang="en">
 
-	</body>
-  <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
-  <script src="{{ URL::asset('assets/js/jquery.scrolly.min.js') }}"></script>
-  <script src="{{ URL::asset('assets/js/skel.min.js') }}"></script>
-  <script src="{{ URL::asset('assets/js/init.js') }}"></script>
-	@yield('scripts')
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<head>
 
-	  ga('create', 'UA-64484825-1', 'auto');
-	  ga('send', 'pageview');
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	</script>
+    <title>@yield('title')</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ URL::asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/vendor/simple-line-icons/css/simple-line-icons.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/vendor/device-mockups/device-mockups.min.css') }}">
+
+    <!-- Theme CSS -->
+    <link href="{{ URL::asset('assets/css/new-age.css') }}" rel="stylesheet">
+    @yield('styles')
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Find Enchiladas <span><img class="nav-logo" src="{{ URL::asset('assets/img/new-logo.png') }}"></span></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#download">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#features">Search</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+		@yield('content')
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2016 Find Enchiladas. All Rights Reserved.</p>
+            <ul class="list-inline">
+                <li>
+                    <a href="#">Privacy</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+                <li>
+                    <a href="#">FAQ</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="{{ URL::asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ URL::asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="{{ URL::asset('assets/js/new-age.min.js') }}"></script>
+
+    @yield('scripts')
+
+</body>
+
 </html>

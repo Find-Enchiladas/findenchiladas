@@ -20,7 +20,7 @@ class Message extends Command
      *
      * @var string
      */
-    protected $description = 'Command description.';
+    protected $description = 'Send messages to active users.';
 
     /**
      * Create a new command instance.

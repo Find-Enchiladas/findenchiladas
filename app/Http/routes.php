@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', ['as' => 'auth.login', 'uses' => 'UserController@index']);
+Route::get('/', ['uses' => 'UserController@index']);
 Route::get('/home', ['uses' => 'UserController@index']);
-Route::get('/login', 'UserController@index');
+Route::get('/login', 'UserController@login');
 Route::get('/signup', function() {
   return view('signup');
 });
@@ -24,12 +24,13 @@ Route::post('/search', 'FoodController@search');
 
 Route::post('/signup', 'UserController@store');
 
-Route::get('/user', [ 'middleware' => 'auth', 'uses' => 'UserController@showFav']);
-Route::post('/user', [ 'middleware' => 'auth', 'uses' => 'UserController@storeFav']);
-Route::patch('/user/favorite/{id}', [ 'middleware' => 'auth', 'as' => 'favorite.delete', 'uses' => 'UserController@deleteFavorite']);
+// authenticated user actions
+Route::get('/user', [ 'middleware' => 'auth', 'uses' => 'UserController@home']);
+Route::post('/user/favorites', [ 'middleware' => 'auth', 'uses' => 'UserController@updateFavorites']);
 
 Route::post('/login', ['uses' => 'Auth\AuthController@postLogin', 'as' => 'auth.login']);
-Route::get('/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout']);
+Route::post('/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout']);
+
 Route::post('/forgot', 'UserController@forgot');
 Route::post('/phone', 'UserController@phone');
 
