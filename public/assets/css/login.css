@@ -49,7 +49,7 @@
   font-size: 12px;
 }
 .form .message a {
-  color: #fdb721;
+  color: #137fc3;
   text-decoration: none;
 }
 .form .register-form {
@@ -88,11 +88,11 @@
   color: #EF3B3A;
 }
 body {
-  background: #ad92c2; /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, #ad92c2, #9291CF);
-  background: -moz-linear-gradient(right, #ad92c2, #9291CF);
-  background: -o-linear-gradient(right, #ad92c2, #9291CF);
-  background: linear-gradient(to left, #ad92c2, #9291CF);
+  background: #f6c100; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #f6c100, #e81d24);
+  background: -moz-linear-gradient(right, #f6c100, #e81d24);
+  background: -o-linear-gradient(right, #f6c100, #e81d24);
+  background: linear-gradient(to left, #f6c100, #e81d24);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

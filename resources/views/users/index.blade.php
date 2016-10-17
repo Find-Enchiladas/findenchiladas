@@ -5,7 +5,7 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-md-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
@@ -19,7 +19,7 @@
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <div class="col-lg-9 col-xs-6">
+        <div class="col-lg-9 col-md-9 col-xs-6">
           <form method="POST" action="/user/favorites">
             {{ csrf_field() }}
             <div class="form-group">
@@ -81,7 +81,8 @@
         <!-- ./col -->
       </div>
       <!-- /.row -->
-          <form method="POST" action="/user/sms">
+      <div class="col-lg-3 col-xs-6">
+          <form method="POST" action="/user/settings/sms">
             {{ csrf_field() }}
           <div class="form-group">
           <label for="sms">Turn Off SMS Notifications</label>
@@ -89,11 +90,12 @@
             @if(\Auth::user()->smsNotify == 0)
               <input type="checkbox" name="sms" value="1">
             @else
-              <input type="checkbox" name="sms" value="0" checked>
+              <input type="checkbox" name="sms" value="1" checked>
             @endif
           </div>
           <button class="btn btn-primary" type="submit">Save</button>
         </form>
+      </div>
       <!-- Main row -->
       {{-- <div class="row">
         <!-- Left col -->
@@ -441,7 +443,26 @@
   @section('more-scripts')
     <script>
     $("#favorites").select2({
-      tags: true
+      tags: true,
+      createTag: function (tag) {
+
+            // check if the option is already there
+            found = false;
+            $("#favorites option").each(function() {
+                if ($.trim(tag.term).toUpperCase() === $.trim($(this).text()).toUpperCase()) {
+                    found = true;
+                }
+            });
+
+            // if it's not there, then show the suggestion
+            if (!found) {
+                return {
+                    id: tag.term,
+                    text: tag.term,
+                    newTag: true
+                };
+            }
+        }
     });
     $("[name='sms']").bootstrapSwitch({
       size: 'large',

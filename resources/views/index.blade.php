@@ -1,5 +1,13 @@
 @extends('master')
 @section('title', "Find Enciladas")
+@section('styles')
+  <style>
+    .search-h3 {
+      color: #fff;
+      margin-bottom: 25px;
+    }
+  </style>
+@endsection
 @section('content')
   <header>
       <div class="container">
@@ -18,7 +26,7 @@
                           <div class="device">
                               <div class="screen">
                                   <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                  <img src="{{ URL::asset('assets/img/demo-screen-1.jpg') }}" class="img-responsive" alt="">
+                                  <img src="{{ URL::asset('assets/img/demo-screen-2.jpg') }}" class="img-responsive" alt="">
                               </div>
                               <div class="button">
                                   <!-- You can hook the "home button" to some JavaScript events or just remove it -->
@@ -64,7 +72,7 @@
                           <div class="device">
                               <div class="screen">
                                   <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                  <img src="{{ URL::asset('assets/img/demo-screen-1.jpg') }}" class="img-responsive" alt=""> </div>
+                                  <img src="{{ URL::asset('assets/img/demo-screen-2.jpg') }}" class="img-responsive" alt=""> </div>
                               <div class="button">
                                   <!-- You can hook the "home button" to some JavaScript events or just remove it -->
                               </div>
@@ -115,7 +123,8 @@
       <div class="cta-content">
           <div class="container">
               <h2>Go Ahead.<br>Try It!</h2>
-              <a href="#contact" class="btn btn-outline btn-xl page-scroll">Search!</a>
+              <h3 class="search-h3">Check to see what's being served in the dining hall today!</h3>
+              <a href="/search" class="btn btn-outline btn-xl page-scroll">Search!</a>
           </div>
       </div>
       <div class="overlay"></div>
@@ -126,13 +135,13 @@
           <h2>We <i class="fa fa-heart"></i> new friends!</h2>
           <ul class="list-inline list-social">
               <li class="social-github">
-                  <a href="#"><i class="fa fa-github"></i></a>
+                  <a href="https://github.com/Find-Enchiladas/findenchiladas"><i class="fa fa-github"></i></a>
               </li>
               <li class="social-email">
-                  <a href="#"><i class="fa fa-envelope"></i></a>
+                  <a href="mailto:kevin.a.cunanan@gmail.com"><i class="fa fa-envelope"></i></a>
               </li>
               <li class="social-linkedin">
-                  <a href="#"><i class="fa fa-linkedin"></i></a>
+                  <a href="https://www.linkedin.com/in/kevin-cunanan"><i class="fa fa-linkedin"></i></a>
               </li>
           </ul>
       </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 use App\User;
 use App\Diner_Trans_Hall;
 use App\Favorites;
@@ -68,9 +69,14 @@ class UserController extends Controller
     public function sms(Request $request) {
       if(\Auth::check()) {
         $user = \Auth::user();
-        $user->smsNotify = $request->input('smsVal');
+        if($request->input('sms')) {
+          $user->smsNotify = $request->input('sms');
+        }
+        else {
+          $user->smsNotify = 0;
+        }
         $user->save();
-        return redirect('/user/settings');
+        return redirect('/user');
 
 
       }
@@ -157,14 +163,16 @@ class UserController extends Controller
           $frary->save();
         }
 
-        if($request->input('frank')) {
+        if($request->input('olden')) {
           $olden = new Diner_Trans_Hall;
           $olden->dining_id = 7;
           $olden->user_id = $id;
           $olden->preference = $request->input('olden');
           $olden->save();
         }
-        redirect('user');
+        $user = User::find($id);
+        Auth::login($user);
+        return redirect('/user');
     }
     /**
      * Remove the specified resource from storage.

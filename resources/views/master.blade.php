@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('assets/vendor/simple-line-icons/css/simple-line-icons.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('assets/vendor/device-mockups/device-mockups.min.css') }}">
+    <link rel='shortcut icon' href="{{ URL::asset('favicon-16x16.png') }}">
 
     <!-- Theme CSS -->
     <link href="{{ URL::asset('assets/css/new-age.css') }}" rel="stylesheet">
@@ -46,20 +47,20 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Find Enchiladas <span><img class="nav-logo" src="{{ URL::asset('assets/img/new-logo.png') }}"></span></a>
+                <a class="navbar-brand page-scroll" href="/">Find Enchiladas <span><img class="nav-logo" src="{{ URL::asset('assets/img/new-logo.png') }}"></span></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="#download">Login</a>
+                        <a class="" href="/login">Login</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#features">Search</a>
+                          <a class="" href="/search">Search</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="" href="/contact">Contact</a>
                     </li>
                 </ul>
             </div>
